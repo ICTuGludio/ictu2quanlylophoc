@@ -13,13 +13,12 @@
 Route::get('/', 'LopHocController@index');
 Route::get('/lop','LopHocController@index');
 Route::get('/lop/{lopid}/','LopHocController@dssvTrongLop');
-Route::get('/lop/{lopid}/{hpbd}/','LopHocController@dssvHBBD');
+Route::get('/snlop/{lopid}/','LopHocController@dssvHBBD');
 Route::post('/lop/timsvTrongLop/','LopHocController@timsvTrongLop');
 
 
-Route::get('/phanlop', 'LopHocController@formphanlop');
-Route::post('/phanlop/timsvmoi','LopHocController@timsvMoi');
-Route::post('/phanlop','LopHocController@phanlop');
+Route::get('/plop/{lopid}/', 'LopHocController@uiphanlop');
+Route::get('/plop/{lopid}/{masv}','LopHocController@phanlop');
 
 //View share dùng cho tất cả view
 View::Share('title','Tiêu đề');

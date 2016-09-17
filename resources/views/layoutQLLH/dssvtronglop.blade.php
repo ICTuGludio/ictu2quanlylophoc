@@ -1,77 +1,28 @@
-@extends('layoutQLLH.main')
 
-@if ($lop)
-	@section('title')
-		Dánh sách sinh viên trong lớp {{ $lop->tenlop }} 
-	@endsection		
-@endif
-
-@section('content')
-   
-   <div class="main-content" style="padding-top:20px">
-	<div class="row">
-		<div class="col-xs-9 main-col">
-			<div class="widget">
-				<div class="well">
-				<div class="widget-body">
-					<div class="row">
-					<form method="post" action="{{URL::action('LopHocController@timsvTrongLop')}}">
-						<input type=hidden name=_token value={{csrf_token()}} />
-						<div class="col-xs-12">
-								<div class="form-inline text-center filter">
-									<input type="hidden" name="lopid" value="{{ $lop->lopid }}">
-									
-									<div class="form-group" id="su-type-term">
-										<input type="text" name="htsv" value="" placeholder="Nhập họ tên sinh viên">
-									</div>
-									<div class="form-group">
-										<input type="submit" value="Tìm kiếm" class="btn btn-primary">
-									</div>
-								</div>
-						</div>
-					</form>
-					</div>
-				</div>
-				</div>
-			</div>
+   <h2 style="background-color:#990099;color:white;padding:5px;">eICTUclassstudentList - Sinh viên trong lớp học</h3>
+   <a href="{{ URL::to('/plop/') }}/{{ $lop->lopid }}" style=" text-decoration:none;"><img src="{{ URL::asset('assets/image/li.png') }}" />
+    THÊM SINH VIÊN VÀO LỚP</a>
+   <table cellspacing=5 cellpadding=5>
 			
-			
-			
-		<div class="widget">
-			<div class="widget-title"><h3><div class="text-bold text-uppercase text-center">Danh sách sinh viên lớp {{ $lop->tenlop }}</div></h3></div>
-		<div class="widget-body">
-		
-		<table class="table table-condensed table-hover table-bordered">
-			<thead>
-				<tr class="">
-					<th width="50" class="text-center">STT</th>
-					<th class="text-center">Mã SV</th>
-					<th class="text-center">Họ tên</th>
-					<th class="text-center">Ngày sinh</th>
-					<th class="text-center">Lớp</th>
-				</tr>
+				<tr><th align="left" colspan=3 >Danh sách sinh viên lớp {{ $lop->tenlop }}</th></tr>
 				@if (count($sinhviens) === 0)
 					I have no record!
 				@else
 					@foreach ($sinhviens as $sv)						
-						<tr class="">
-							<th width="50" class="text-center">{{ $loop->iteration }}</th>
-							<th class="text-center">{{ $sv->masv }}</th>
-							<th class="text-center">{{ $sv->hoten }}</th>
-							<th class="text-center">{{ $sv->ngaysinh }}</th>							
-							<th class="text-center">{{ $lop->tenlop }}</th>
+						<tr >
+							<th align="left"  >{{ $loop->iteration }}.</th>
+							<th align="left">{{ $sv->masv }}</th>
+							<th align="left">{{ $sv->hoten }}</th>
 						</tr>
 					@endforeach
 				@endif
-			</thead>
+		
 			
 		</table>
-	</div>
-</div>			
 		
-</div>
+		
 
-   
-@endsection			
+
+
 		
 					

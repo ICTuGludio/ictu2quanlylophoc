@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Quản Lý Lớp học - @yield('title')</title>
+	<title>Quản Lý Lớp học </title>
 	
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/css/bootstrap-plugin.css') }}">

@@ -13,15 +13,15 @@
 		function index()
 		{
 			$lops =  DB::table('lop')->select('tenlop','lopid')->get();
-			return view('layoutQLLH.danhsachlop',['dslop'=>$lops]);
+			return view('layoutQLLH.trangchu',['dslop'=>$lops]);
 		}
 		
 		// tạo view trang phân lớp cho sinh viên
-		function formphanlop()
+		function uiphanlop($lopid)
 		{
-			$dslop =  DB::table('lop')->select('tenlop','lopid')->get();
+			$lop= DB::table('lop')->select('tenlop','lopid')->where('lopid', '=', $lopid)->get()->first();
 			$sinhviens =  DB::table('sinhvien')->select('masv','hoten', 'ngaysinh')->where('lopid', '=', null)->get();
-			return view('layoutQLLH.phanlop',['sinhviens' => $sinhviens,'dslop'=>$dslop]);
+			return view('layoutQLLH.phanlop',['sinhviens' => $sinhviens,'lop'=>$lop]);
 			
 		}
 		//Tìm sinh viên giới hạn trong 1 lớp
@@ -48,21 +48,18 @@
 			return view('layoutQLLH.phanlop',['sinhviens' => $sinhviens,'dslop'=>$dslop]);
 
 		}
-		function phanlop(Request $request)
+		function phanlop($lopid,$masv)
 		{
 			//$dslop =  DB::table('lop')->select('tenlop','lopid')->get();
 			//$sinhviens =  DB::table('sinhvien')->select('masv','hoten', 'ngaysinh')->where('lopid', '=', null)->get();
 			//return view('layoutQLLH.phanlop',['sinhviens' => $sinhviens,'dslop'=>$dslop]);
-			$allrq = $request->all();
-			$checkedsv=$allrq['checkedsv'];
-			print_r($checkedsv);
-			$lopid = Input::get('phanlopid');
-			foreach($checkedsv as $masv)
-			{
+			
+			//$lopid = Input::get('phanlopid');
+			
 				DB::table('sinhvien')
 					->where('masv', $masv)
 					->update(['lopid' => $lopid]);
-			}
+			
 			return Redirect::back()->with('msg', 'Phân lớp xong');
 		}
 		
@@ -77,7 +74,7 @@
 		}
 		
 		//function dssvHBBD($lopid,$hbbd) tìm các bạn sinh viên sẽ sinh nhật trong 30 ngày tới
-		function dssvHBBD($lopid,$hbbd)
+		function dssvHBBD($lopid)
 		{
 			
 			$dslop =  DB::table('lop')->select('tenlop','lopid')->get();
